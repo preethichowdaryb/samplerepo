@@ -10,8 +10,8 @@ pipeline {
 
         stage('Upload to S3') {
             steps {
-                withAWS(region: 'us-east-1', credentials: 'aws-credentials-id') {
-                    //  Use the full AWS CLI path
+                withAWS(region: 'us-east-1', credentials: 'AWS conf with jenkins') {
+                    // Full AWS CLI path to avoid PATH issues
                     sh '/opt/homebrew/bin/aws s3 cp sample.txt s3://your-jenkins-builds/sample.txt'
                 }
             }
@@ -27,5 +27,6 @@ pipeline {
         }
     }
 }
+
 
 
