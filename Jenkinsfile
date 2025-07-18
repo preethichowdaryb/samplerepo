@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        AWS_DEFAULT_REGION = "us-east-1"
-        S3_BUCKET = "your-jenkins-builds"
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
@@ -15,8 +10,9 @@ pipeline {
 
         stage('Upload to S3') {
             steps {
-                withAWS(credentials: 'AWS conf with jenkins', region: 'us-east-1') {
-                    sh 'aws s3 cp sample.txt s3://your-jenkins-builds/sample.txt'
+                withAWS(region: 'us-east-1', credentials: 'aws-credentials-id') {
+                    //  Use the full AWS CLI path
+                    sh '/opt/homebrew/bin/aws s3 cp sample.txt s3://your-jenkins-builds/sample.txt'
                 }
             }
         }
@@ -24,11 +20,12 @@ pipeline {
 
     post {
         success {
-            echo "✅ File successfully uploaded to S3!"
+            echo " Successfully uploaded to S3."
         }
         failure {
-            echo "❌ Failed to upload to S3."
+            echo " Failed to upload to S3."
         }
     }
 }
+
 
