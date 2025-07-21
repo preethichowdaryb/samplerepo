@@ -12,7 +12,7 @@ pipeline {
             steps {
                 withAWS(region: 'us-east-1', credentials: 'AWS conf with jenkins') {
                     // Full AWS CLI path to avoid PATH issues
-                    sh '/opt/homebrew/bin/aws s3 cp Hello.txt s3://your-jenkins-builds/Hello.txt'
+                    sh '/opt/homebrew/bin/aws s3 cp sample.txt s3://your-jenkins-builds/sample.txt'
                 }
             }
         }
