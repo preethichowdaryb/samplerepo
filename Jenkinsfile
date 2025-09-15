@@ -25,10 +25,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Successfully uploaded to S3."
+            echo " Successfully uploaded to S3."
         }
         failure {
-            echo "❌ Failed to upload to S3."
+            echo " Failed to upload to S3."
         }
     }
 }
